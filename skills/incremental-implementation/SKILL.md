@@ -180,6 +180,10 @@ Each increment should be independently revertable:
 - Database migrations should have corresponding rollback migrations
 - Avoid deleting something in one commit and replacing it in the same commit — separate them
 
+### Rule 6: Follow Existing Precedent
+
+Before inventing a new pattern, naming convention, or structure, search the codebase (other modules, other packages, other files solving the same kind of problem) for how something similar was already done. Match what you find — the codebase's own adopted conventions are the source of truth, not generic best practice or your own default style. Only treat it as a genuinely open decision if no comparable precedent exists; a non-trivial one then goes through `doubt-driven-development`.
+
 ## Working with Agents
 
 When directing an agent to implement incrementally:
@@ -219,6 +223,7 @@ After each increment, verify with the repository's own commands (see the test-dr
 | "These changes are too small to commit separately" | Small commits are free. Large commits hide bugs and make rollbacks painful. |
 | "I'll add the feature flag later" | If the feature isn't complete, it shouldn't be user-visible. Add the flag now. |
 | "This refactor is small enough to include" | Refactors mixed with features make both harder to review and debug. Separate them. |
+| "I'll just use the pattern I'd reach for by default" | The codebase likely already solved this kind of problem somewhere. Search for precedent first — consistency beats your personal default. |
 | "Let me run the build command again just to be sure" | After a successful run, repeating the same command adds nothing unless the code has changed since. Run it again after subsequent edits, not as reassurance. |
 
 ## Red Flags
@@ -232,6 +237,7 @@ After each increment, verify with the repository's own commands (see the test-dr
 - Building abstractions before the third use case demands it
 - Touching files outside the task scope "while I'm here"
 - Creating new utility files for one-time operations
+- Introducing a new pattern or convention when the codebase already has one for the same kind of problem
 - Running the same build/test command twice in a row without any intervening code change
 
 ## Verification
