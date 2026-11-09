@@ -1,6 +1,6 @@
 ---
 name: interview-me
-description: Extracts what the user actually wants instead of what they think they should want. Achieves this through one-question-at-a-time interview until ~95% confidence about the underlying intent. Use when an ask is underspecified ("build me X" without "for whom" or "why now"), when the user explicitly invokes ("interview me", "grill me", "are we sure?", "stress-test my thinking"), or when you catch yourself silently filling in ambiguous requirements before any plan, spec, or code exists.
+description: Extracts what the user actually wants instead of what they think they should want. Achieves this through one-question-at-a-time interview until ~95% confidence about the underlying intent. Use when an ask is underspecified ("build me X" without "for whom" or "why now"), when the user explicitly invokes ("interview me", "are we sure?", "stress-test my intent"), or when you catch yourself silently filling in ambiguous requirements before any plan, spec, or code exists. If a plan already exists and the user wants its open decisions stress-tested instead, use `grilling`.
 ---
 
 # Interview Me
@@ -21,7 +21,7 @@ Apply this skill when:
 - The request is conventional rather than specific ("build me X", "make it faster") and you can't unpack the convention without guessing
 - You're tempted to start with assumptions you haven't surfaced
 - The user hasn't said which value they're optimizing for when two reasonable ones are in tension (simplicity vs. flexibility, cost vs. speed)
-- The user explicitly invokes: "interview me", "grill me", "before we start, are we sure?", "stress-test my thinking"
+- The user explicitly invokes: "interview me", "before we start, are we sure?", "stress-test my intent"
 
 **When NOT to use:**
 
@@ -188,6 +188,7 @@ Two questions in, the agent has discovered the actual ask isn't "a dashboard." I
 ## Interaction with Other Skills
 
 - **`idea-refine`**: downstream. If the confirmed intent is "I want X but I don't know how to scope it," hand off to `idea-refine` to generate variations against the now-explicit intent.
+- **`grilling`**: downstream. Once intent is confirmed and the plan has multiple interdependent open decisions, hand off to `grilling` to resolve them in batched rounds.
 - **`spec-driven-development`**: downstream. If the confirmed intent is concrete ("I want X for Y users with Z success criteria"), hand off to `spec-driven-development` to write it down.
 - **`planning-and-task-breakdown`**: two hops downstream of this skill (after the spec).
 - **`doubt-driven-development`**: opposite end of the timeline. Interview-me is pre-decision intent extraction; doubt-driven is post-decision artifact review. Both catch divergence, but at different moments.
