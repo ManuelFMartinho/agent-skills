@@ -193,3 +193,9 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 | Ship | documentation-and-adrs | Document the why, not just the what |
 | Ship | observability-and-instrumentation | Structured logs, RED metrics, traces, symptom-based alerts |
 | Ship | shipping-and-launch | Pre-launch checklist, monitoring, rollback plan |
+
+## Project-Specific Integrations
+
+Some projects wire a skill into their own pipeline commands rather than using it standalone. Documented here so the wiring isn't lost to tribal knowledge.
+
+**itowin** — `doubt-driven-development` runs in-flight inside `~/.claude/commands/ticket-implement-tdd.md`'s Implement step: for every non-trivial decision, the implementer spawns a fresh-context subagent biased to disprove before the decision stands. Because of this, `~/.claude/commands/ruthless-review.md`'s Spec agent no longer re-reviews decisions — it only gap-scans `spec.md` against the diff for requirements with no corresponding change at all. Standards, Ponytail, and Checks in `ruthless-review` are unaffected.
